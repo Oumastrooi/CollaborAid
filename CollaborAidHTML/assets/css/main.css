@@ -139,7 +139,7 @@
 	}
 
 	body {
-		background: #242629;
+		background: #76b852;
 	}
 
 		body.loading *, body.loading *:before, body.loading *:after {
@@ -1984,3 +1984,8 @@
 		#footer .copyright a {
 			color: inherit;
 		}
+.logo {
+  
+    margin-left: auto;
+    margin-right: auto;
+}
