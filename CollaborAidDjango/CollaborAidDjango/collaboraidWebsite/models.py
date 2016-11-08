@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractBaseUser
 
 # Create your models here.
 
@@ -9,15 +10,21 @@ from django.db import models
 #   blank=True determines whether the field will be required in forms. This includes the admin and your own custom forms. If blank=True then 
 #   the field will not be required, whereas if it's False the field cannot be blank.
 
-class Person(models.Model):
+
+class User(AbstractBaseUser):
     first_name = models.CharField(max_length=128, blank=False)
     middle_name = models.CharField(max_length=128, blank=True)
     last_name = models.CharField(max_length=128, blank=False)
-    username = models.CharField(max_length=15, blank=False)
     phone = models.CharField(max_length=10, blank=False)
     birth_date = models.DateField(blank=False)
-    email = models.EmailField(blank=False)
+    email = models.EmailField('email address', unique=True, blank=False)
     image = models.URLField(blank=True, null=True)
+    joined = models.DateTimeField(auto_now_add=True)
+
+    USERNAME_FIELD = 'email'
+
+    def __unicode__(self):
+        return self.email
     
 class Event(models.Model):
     date = models.DateField(blank=False)
