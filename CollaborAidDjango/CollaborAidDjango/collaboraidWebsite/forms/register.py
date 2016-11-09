@@ -9,7 +9,7 @@ class RegistrationForm(forms.ModelForm):
     """
     Form for registering a new account.
     """
-    email = forms.EmailField(widget=forms.widget.TextInput,label="Email")
+    email = forms.EmailField(widget=forms.widget.EmailInput,label="Email")
     
     first_name = forms.CharField(widget=forms.widget.TextInput, label="FirstName")
     middle_name = forms.CharField(widget=forms.widget.TextInput, label="MiddleName")
@@ -31,7 +31,6 @@ class RegistrationForm(forms.ModelForm):
         def clean(self):
         """
         Verifies that the values entered into the password fields match
-
         NOTE: Errors here will appear in ``non_field_errors()`` because it applies to more than one field.
         """
         cleaned_data = super(RegistrationForm, self).clean()

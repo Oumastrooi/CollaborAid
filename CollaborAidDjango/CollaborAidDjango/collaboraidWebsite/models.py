@@ -27,9 +27,13 @@ class User(AbstractBaseUser):
         return self.email
     
 class Event(models.Model):
-    date = models.DateField(blank=False)
     name = models.TextField(max_length=60, blank=False)
+    date = models.DateField(blank=False)
     description = models.TextField(max_length=1000, blank=False)
+    start_date = models.DateTimeField(blank=False)
+    end_date = models.DateTimeField(blank=False)
+    start_time = models.TimeField(blank=False)
+    end_time = models.TimeField(blank=False)
     venue = models.ForeignKey(Venue)
 
     def __unicode__(self):
@@ -40,10 +44,6 @@ class Venue(models.Model):
     street_address = models.TextField(max_length=60, blank=False)
     city = models.CharField(max_length=20, blank=False)
     zip_code = models.IntegerField(max_length=5, blank=False)
-    start_date = models.DateTimeField(blank=False)
-    end_date = models.DateTimeField(blank=False)
-    start_time = models.TimeField(blank=False)
-    end_time = models.TimeField(blank=False)
 
     def __unicode__(self):
-        return self.name
+        return self.venue_name
