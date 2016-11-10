@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
+import os
 
 # Create your models here.
 
@@ -18,7 +19,7 @@ class User(AbstractBaseUser):
     phone = models.CharField(max_length=10, blank=False)
     birth_date = models.DateField(blank=False)
     email = models.EmailField('email address', unique=True, blank=False)
-    image = models.URLField(blank=True, null=True)
+#    image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
     joined = models.DateTimeField(auto_now_add=True)
 
     USERNAME_FIELD = 'email'
@@ -26,18 +27,9 @@ class User(AbstractBaseUser):
     def __unicode__(self):
         return self.email
     
-class Event(models.Model):
-    name = models.TextField(max_length=60, blank=False)
-    date = models.DateField(blank=False)
-    description = models.TextField(max_length=1000, blank=False)
-    start_date = models.DateTimeField(blank=False)
-    end_date = models.DateTimeField(blank=False)
-    start_time = models.TimeField(blank=False)
-    end_time = models.TimeField(blank=False)
-    venue = models.ForeignKey(Venue)
+    def get_image_path(instance, filename):
+        return os.path.join('photos', str(instance.id), filename)
 
-    def __unicode__(self):
-        return self.name
 
 class Venue(models.Model):
     venue_name = models.TextField(max_length=60, blank=False)
@@ -47,3 +39,21 @@ class Venue(models.Model):
 
     def __unicode__(self):
         return self.venue_name
+
+    
+class Event(models.Model):
+    name = models.TextField(max_length=60, blank=False)
+    date = models.DateField(blank=False)
+    description = models.TextField(max_length=1000, blank=False)
+    start_date = models.DateTimeField(blank=False)
+    end_date = models.DateTimeField(blank=False)
+    start_time = models.TimeField(blank=False)
+    end_time = models.TimeField(blank=False)
+#    event_image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    venue = models.ForeignKey(Venue)
+
+    def __unicode__(self):
+        return self.name
+    
+    def get_image_path(instance, filename):
+        return os.path.join('photos', str(instance.id), filename)

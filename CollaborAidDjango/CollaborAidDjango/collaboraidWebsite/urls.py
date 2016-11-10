@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
-from . import views
+from collaboraidWebsite import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),

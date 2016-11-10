@@ -6,15 +6,12 @@ from django.contrib.auth import login as django_login, authenticate, logout as d
 from collaboraidWebsite.forms import AuthenticationForm, RegistrationForm
 
 
-
-
 def index(request):
     """
     Return a list of stories that match the provided search term
     in either the title or the main content.
     """
-    return HttpResponse("Hello, world. You're at the polls index.")
-#    return render_to_response("index.html", {}, RequestContext(request))
+    return render_to_response("index.html", {}, RequestContext(request))
 
 
 def login(request):

@@ -2,7 +2,7 @@
 
 from django import forms
 
-from accounts.models import User
+from collaboraidWebsite.models import User
 from django.forms import extras
 
 class RegistrationForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class RegistrationForm(forms.ModelForm):
     last_name = forms.CharField(widget=forms.widget.TextInput, label="LastName")
     phone = forms.CharField(widget=forms.widget.TextInput, label="PhoneNumber")
     birth_date = forms.DateField(widget=extras.SelectDateWidget, label="BirthDate")
-    image = forms.URLField(blank=True, null=True)
+#    image = forms.URLField(blank=True, null=True)
     
     password1 = forms.CharField(widget=forms.widget.PasswordInput,
                                 label="Password")
