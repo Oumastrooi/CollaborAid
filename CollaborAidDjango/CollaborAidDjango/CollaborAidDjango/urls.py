@@ -22,6 +22,6 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
 
-urlpatterns = patterns('',
-    url(r'^collaboraidWebsite/', include('collaboraidWebsite.urls', namespace='accounts')),
-)
+#urlpatterns = patterns('',
+#    url(r'^collaboraidWebsite/', include('collaboraidWebsite.urls', namespace='accounts')),
+#)
