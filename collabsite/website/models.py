@@ -19,7 +19,7 @@ import os
 #   the field will not be required, whereas if it's False the field cannot be blank.
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email address', unique=True, blank=False)
     first_name = models.CharField(max_length=128, blank=False)
     last_name = models.CharField(max_length=128, blank=False)
@@ -28,7 +28,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
-    objects = UserManager()
+    objects = CustomUserManager()
     
     def get_image_path(instance, filename):
         return os.path.join('photos', str(instance.id), filename)
