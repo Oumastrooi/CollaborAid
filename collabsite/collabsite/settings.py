@@ -127,4 +127,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'website.User'
+
+# For some reason this is the devil. WHY?!!!!
+#AUTH_USER_MODEL = 'website.User'

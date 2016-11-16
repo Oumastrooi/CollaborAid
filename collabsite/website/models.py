@@ -1,11 +1,12 @@
+from __future__ import unicode_literals
+
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import PermissionsMixin
+from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
-from .managers import UserManager
-from django.contrib.auth.models import BaseUserManager
 from django.utils import timezone
 from django.core.mail import send_mail
-from django.conf import settings
+from .managers import UserManager
 
 import os
 
@@ -19,7 +20,7 @@ import os
 #   the field will not be required, whereas if it's False the field cannot be blank.
 
 
-class CustomUser(AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email address', unique=True, blank=False)
     first_name = models.CharField(max_length=128, blank=False)
     last_name = models.CharField(max_length=128, blank=False)
@@ -28,12 +29,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 
-    objects = CustomUserManager()
-    
-    def get_image_path(instance, filename):
-        return os.path.join('photos', str(instance.id), filename)
+    objects = UserManager()
         
-    avatar = models.ImageField(upload_to=get_image_path, blank=False, null=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=False, null=True)
         
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', 'birth_date', 'avatar']
@@ -55,10 +53,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return self.first_name
 
     # Sends an email to this user
-    def email_user(self, subject, message, from_email=None, **kwargs):
-        send_mail(subject, message, from_email, [self.email], **kwargs)
+    def email_user(self, subject, message, from_email=None):
+        send_mail(subject, message, from_email, [self.email])
     
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     use_in_migrations = True
 
     # Creates and saves a User with the given email and password
@@ -67,9 +65,8 @@ class CustomUserManager(BaseUserManager):
         if not email:
             raise ValueError('The given email must be set.')
         email = self.normalize_email(email)
-        user = self.model(email=email,
-                          is_admin=is_admin, is_active=True,
-                          last_login=now, date_joined=auto_now_add, **extra_fields)
+        user = self.model(email=email, first_name=first_name, 
+                          last_name=last_name, phone=phone, birth_date=birth_date, avatar=avatar)
         user.set_password(password)
         user.save(using=self._db)
         return user
@@ -105,12 +102,9 @@ class Event(models.Model):
     start_time = models.TimeField(blank=False)
     end_time = models.TimeField(blank=False)
     venue = models.ForeignKey(Venue)
-    event_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    event_owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __unicode__(self):
         return self.name
     
-    def get_image_path(instance, filename):
-        return os.path.join('photos', str(instance.id), filename)
-    
-    event_image = models.ImageField(upload_to=get_image_path, blank=True, null=True)
+    event_image = models.ImageField(upload_to='avatars/', blank=True, null=True)
