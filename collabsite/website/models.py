@@ -20,7 +20,7 @@ import os
 #   the field will not be required, whereas if it's False the field cannot be blank.
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+'''class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField('email address', unique=True, blank=False)
     first_name = models.CharField(max_length=128, blank=False)
     last_name = models.CharField(max_length=128, blank=False)
@@ -55,6 +55,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     # Sends an email to this user
     def email_user(self, subject, message, from_email=None):
         send_mail(subject, message, from_email, [self.email])
+'''
     
 class UserManager(BaseUserManager):
     use_in_migrations = True
