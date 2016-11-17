@@ -1,0 +1,24 @@
+	{% extends 'website/base.html' %}
+	{% load staticfiles %}
+
+	{% block title_block %}
+		Index
+	{% endblock %}
+	
+	{% block body_block %}
+	
+	<div class="jumbotron">
+		<h1 class="display-3">Welcome!</h1>
+		{% if user.is_authenticated %}
+			<p class="lead">Start volunteering today, {{ user.username }}.</p>
+            <p class="lead">Do good. Feel good.</p>
+		{% else %}
+			<p class="lead">Start volunteering today. </p>
+		{% endif %}
+        
+        <img src={% static "images/logo.png" %} alt="logo">
+ 	</div>
+								
+	{% endblock %}
+
+
