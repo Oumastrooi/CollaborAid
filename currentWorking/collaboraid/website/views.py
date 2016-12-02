@@ -79,7 +79,7 @@ def profile(request, username):
     
     userprofile = UserProfile.objects.get_or_create(user=user)[0]
     form = UserProfileForm({'first_name': userprofile.first_name, 'last_name': userprofile.last_name, 
-                            'website': userprofile.website, 'picture': userprofile.picture })
+                            'picture': userprofile.picture })
     
     if request.method == 'POST':
         form = UserProfileForm(request.POST, request.FILES, instance=userprofile)
