@@ -22,6 +22,8 @@ class Event(models.Model):
     end_time = models.TimeField()
     venue = models.CharField(max_length=500)
     picture = models.ImageField(upload_to='event_images', blank=True)
+    volunteer_num = models.IntegerField(default=1)
+    
     event_owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 

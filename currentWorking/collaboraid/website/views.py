@@ -92,6 +92,25 @@ def profile(request, username):
     return render(request, 'website/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 @login_required
+def join(request, event_id):
+    try:
+        # already joined
+        event = Event.objects.get(id=event_id, guest=request.user)
+        message = "You have already joined this event"
+    except Event.DoesNotExist as e:
+        # Event exists and join
+        try:
+            event = Event.objects.get(id=event_id)
+            event.guest.add(request.user)
+            event.save()
+            message = "You have joined this event"
+        except Event.DoesNotExist as e:
+            message = "Error on event joining"
+
+    event = Event.objects.get(id=event_id)
+    return render(request, 'website/detail.html', {'event': event, 'message': message})
+
+@login_required
 def list_profiles(request):
     userprofile_list = UserProfile.objects.all()
     return render(request, 'website/list_profiles.html', { 'userprofile_list' : userprofile_list})
