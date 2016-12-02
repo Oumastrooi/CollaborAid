@@ -17,7 +17,7 @@ class UserProfile(models.Model):
 class Event(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=1000, default= '')
-    date = models.DateTimeField()
+    date = models.DateField()
     start_time = models.TimeField()
     end_time = models.TimeField()
     venue = models.CharField(max_length=500)
@@ -27,5 +27,5 @@ class Event(models.Model):
     event_owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
