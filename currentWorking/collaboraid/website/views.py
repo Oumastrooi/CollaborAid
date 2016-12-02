@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from website.models import UserProfile
+from website.models import UserProfile, Event
 from website.forms import UserProfileForm
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.decorators import login_required
@@ -95,3 +95,8 @@ def profile(request, username):
 def list_profiles(request):
     userprofile_list = UserProfile.objects.all()
     return render(request, 'website/list_profiles.html', { 'userprofile_list' : userprofile_list})
+
+@login_required
+def list_events(request):
+    event_list = Event.objects.all()
+    return render(request, 'website/list_events.html', { 'event_list' : event_list})
