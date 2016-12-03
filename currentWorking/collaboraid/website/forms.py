@@ -24,7 +24,7 @@ class AnEventForm(forms.ModelForm):
     #month = forms.CharField(required=True)
     #day = forms.DateField(required=True)
     #year = forms.DateField(required=True)
-    start_date = forms.DateField(required=True)
+    date = forms.DateField(required=True)
     start_time = forms.TimeField(required=True)
     end_time = forms.TimeField(required=True)
     

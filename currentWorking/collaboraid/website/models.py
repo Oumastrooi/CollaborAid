@@ -35,7 +35,7 @@ class AnEvent(models.Model):
     #start_time = models.TimeField(help_text='ex: 10:30 for 10:30 AM', default=datetime.time(00, 00))
     #end_time = models.TimeField(help_text='ex: 13:30 for 1:30 PM', default=datetime.time(00, 00))
     
-    start_date = models.DateField( ("Start Date"), auto_now_add=True,blank=False)
+    date = models.DateField( ("Start Date"), auto_now_add=True,blank=False)
     start_time = models.TimeField( ("Start Time"), auto_now = True,blank=False)
     end_time = models.TimeField( ("End Time"),blank=False)
 
