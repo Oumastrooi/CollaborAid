@@ -26,14 +26,19 @@ class AnEvent(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=60)
     state = models.CharField(max_length=30)
-    
-    date = models.DateField(default=date.today)
-    start_time = models.TimeField(help_text='ex: 10:30 for 10:30 AM', default=datetime.time(00, 00))
-    end_time = models.TimeField(help_text='ex: 13:30 for 1:30 PM', default=datetime.time(00, 00))
 
-    #event_owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    #month=models.CharField(
+    #    max_length = 12)
+    #day=models.DateField(max_length = 2)
+    #year=models.DateField(max_length = 4)
+
+    #start_time = models.TimeField(help_text='ex: 10:30 for 10:30 AM', default=datetime.time(00, 00))
+    #end_time = models.TimeField(help_text='ex: 13:30 for 1:30 PM', default=datetime.time(00, 00))
     
-    volunteer = models.ManyToManyField(User, blank=True)
+    start_date = models.DateField( ("Start Date"), auto_now_add=True,blank=False)
+    start_time = models.TimeField( ("Start Time"), auto_now = True,blank=False)
+    end_time = models.TimeField( ("End Time"),blank=False)
+
 
     # Override the __unicode__() method to return out something meaningful!
     def __str__(self):
