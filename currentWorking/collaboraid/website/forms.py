@@ -11,17 +11,20 @@ class UserProfileForm(forms.ModelForm):
         exclude = ('user',)
         
 class AnEventForm(forms.ModelForm):
-    event_name = forms.CharField(required=False)
-    venue = forms.CharField(required=False)
-    address = forms.CharField(required=False)
-    city = forms.CharField(required=False)
-    state = forms.CharField(required=False)
-    website = forms.URLField(required=False)
+    event_name = forms.CharField(required=True)
     picture = forms.ImageField(required=False)
-    description = forms.CharField(required=False)
-    #date = forms.DateField(required=False)
-    #time = forms.TimeField(required=False)
+    description = forms.CharField(required=True)
+    volunteer_num = forms.IntegerField(required=True)
+
+    venue = forms.CharField(required=True)
+    address = forms.CharField(required=True)
+    city = forms.CharField(required=True)
+    state = forms.CharField(required=True)
+    
+    date = forms.DateField(required=True)
+    start_time = forms.TimeField(required=True)
+    end_time = forms.TimeField(required=True)
     
     class Meta:
         model = AnEvent
-        exclude = ('event_name',)
+        exclude = ()

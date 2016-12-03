@@ -108,6 +108,25 @@ def register_event(request):
     return render(request, 'website/event_registration.html', context_dict)
 
 @login_required
+def join(request, event_id):
+    try:
+        # already joined
+        event = AnEvent.objects.get(id=event_id, volunteer=request.user)
+        message = "You have already joined this event"
+    except AnEvent.DoesNotExist as e:
+        # Event exists and join
+        try:
+            event = AnEvent.objects.get(id=event_id)
+            event.volunteer.add(request.user)
+            event.save()
+            message = "You have joined this event"
+        except AnEvent.DoesNotExist as e:
+            message = "Error on event joining"
+
+    event = AnEvent.objects.get(id=event_id)
+    return render(request, 'website/event_details.html', {'event': event, 'message': message})
+
+@login_required
 def event_complete(request):
     response = render(request, 'website/creation_complete.html')
     
@@ -122,3 +141,10 @@ def list_profiles(request):
 def list_events(request):
     event_list = AnEvent.objects.all()
     return render(request, 'website/list_events.html', { 'event_list' : event_list})
+
+# Provides individual event details
+@login_required
+def detail(request, id):
+   event = AnEvent.objects.get(id=id)
+   joined = event.volunteer.filter(id=request.user.id)
+   return render(request, 'website/event_details.html', {'event': event, 'joined': joined})
