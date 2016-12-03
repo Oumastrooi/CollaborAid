@@ -10,7 +10,6 @@
             <p></p>
 			<strong>Date: {{event.date}}</strong> <br />
         	<strong>Venue : {{event.venue}}</strong> <br />
-            <strong>Number of volunteers: {{event.volunteer_num}}</strong> <br />
             <strong>Start time : {{event.start_time}}</strong> <br />
             <strong>End time : {{event.end_time}}</strong> <br />
             <strong>Description : {{event.description}}</strong> <br />
@@ -25,12 +24,13 @@
             <p></p>
 
             <div class="user">
-                <h2>Users Attending:</h2>
-                <ul>
+                <h3>Volunteers Needed: {{event.volunteer_num}}</h3>
+                <h3>Users Attending:</h3>
+                <ol>
                     {% for volunteer in event.volunteer.all %}
                     <li> {{ volunteer.username }} </li>
                     {% endfor %}
-                </ul>
+                </ol>
             </div>
 		</div>
 

@@ -26,6 +26,7 @@ class AnEvent(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=60)
     state = models.CharField(max_length=30)
+    volunteer = models.ManyToManyField(User, blank=True)
 
     #month=models.CharField(
     #    max_length = 12)
