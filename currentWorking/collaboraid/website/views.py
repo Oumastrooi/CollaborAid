@@ -146,5 +146,4 @@ def list_events(request):
 @login_required
 def detail(request, id):
    event = AnEvent.objects.get(id=id)
-   joined = event.volunteer.filter(id=request.user.id)
-   return render(request, 'website/event_details.html', {'event': event, 'joined': joined})
+   return render(request, 'website/event_details.html', {'event': event})
