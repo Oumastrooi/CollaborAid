@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'^create_event/$', views.register_event, name = 'create_event'),
     url(r'^create_complete/$', views.event_complete, name = 'created_event'),
     url(r'^events/(?P<id>\d+)/$', views.detail, name='event_detail'),
+    url(r'^events/join/(?P<event_id>\d+)/$', views.join, name='event_join'),
+    url(r'^events/cancel/(?P<event_id>\d+)/$', views.cancel, name='event_cancel'),
 
 ]

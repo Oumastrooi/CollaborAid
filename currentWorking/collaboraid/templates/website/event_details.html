@@ -7,15 +7,14 @@
 {% block body_block %}
 
 			<h2>{{event.event_name}}</h2>
+            <p></p>
 			<strong>Date: {{event.date}}</strong> <br />
         	<strong>Venue : {{event.venue}}</strong> <br />
             <strong>Number of volunteers: {{event.volunteer_num}}</strong> <br />
             <strong>Start time : {{event.start_time}}</strong> <br />
             <strong>End time : {{event.end_time}}</strong> <br />
-			
-			<p>{{event.description}}</p>
-        
-		<div class="barleft col-sm-4">
+            <strong>Description : {{event.description}}</strong> <br />
+                
             <p clss="msg">{% if request.GET.msg %} {{request.GET.msg }} {% endif %}</p>
             {% if not joined %}
             <a href="{% url 'event_join' event.id %}" class="btn join">Yes, Attend</a>
@@ -23,7 +22,10 @@
             <a href="{% url 'event_cancel' event.id %}" class="btn join">No, Not Attend</a>
             {% endif %}
 
+            <p></p>
+
             <div class="user">
+                <h2>Users Attending:</h2>
                 <ul>
                     {% for volunteer in event.volunteer.all %}
                     <li> {{ volunteer.username }} </li>
@@ -31,4 +33,5 @@
                 </ul>
             </div>
 		</div>
+
 {% endblock %}
