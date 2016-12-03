@@ -16,7 +16,7 @@ class UserProfile(models.Model):
         return self.user.username
     
 class AnEvent(models.Model):
-    event_name = models.CharField(max_length=30)
+    event_name = models.CharField(max_length=50)
     
     picture = models.ImageField(upload_to='event_images', blank=True)
     description = models.TextField(max_length=400)
@@ -26,6 +26,7 @@ class AnEvent(models.Model):
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=60)
     state = models.CharField(max_length=30)
+    
     volunteer = models.ManyToManyField(User, blank=True)
 
     #month=models.CharField(
@@ -36,10 +37,10 @@ class AnEvent(models.Model):
     #start_time = models.TimeField(help_text='ex: 10:30 for 10:30 AM', default=datetime.time(00, 00))
     #end_time = models.TimeField(help_text='ex: 13:30 for 1:30 PM', default=datetime.time(00, 00))
     
-    date = models.DateField( ("Start Date"), auto_now_add=True,blank=False)
-    start_time = models.TimeField( ("Start Time"), auto_now = True,blank=False)
-    end_time = models.TimeField( ("End Time"),blank=False)
-
+    date = models.DateField(("Date"), auto_now_add=True, blank=False)
+    
+    start_time = models.TimeField(("Start Time"), auto_now = True, blank=False)
+    end_time = models.TimeField(("End Time"), blank=False)
 
     # Override the __unicode__() method to return out something meaningful!
     def __str__(self):

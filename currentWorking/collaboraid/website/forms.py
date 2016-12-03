@@ -30,4 +30,4 @@ class AnEventForm(forms.ModelForm):
     
     class Meta:
         model = AnEvent
-        exclude = ()
+        exclude = ('volunteer',)
