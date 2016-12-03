@@ -6,6 +6,7 @@ from website.forms import UserProfileForm, AnEventForm
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from datetime import datetime
 
 # Create your views here.
 
@@ -124,7 +125,30 @@ def join(request, event_id):
             message = "Error on event joining"
 
     event = AnEvent.objects.get(id=event_id)
-    return render(request, 'website/event_details.html', {'event': event, 'message': message})
+    joined = event.volunteer.filter(id=request.user.id)
+    return render(request, 'website/event_details.html', {
+       'event': event,
+       'message': message,
+       'joined': joined
+    })
+
+@login_required
+def cancel(request, event_id):
+    try:
+        event = AnEvent.objects.get(id=event_id, volunteer=request.user)
+        event.volunteer.remove(request.user)
+        event.save()
+        message = "Your request not to attend has been saved"
+    except AnEvent.DoesNotExist as e:
+           message = "Error on cancelling your attedance on event"
+
+    event = AnEvent.objects.get(id=event_id)
+    joined = event.volunteer.filter(id=request.user.id)
+    return render(request, 'website/event_details.html', {
+        'event': event,
+        'message': message,
+        'joined': joined
+    })
 
 @login_required
 def event_complete(request):
@@ -141,9 +165,19 @@ def list_profiles(request):
 def list_events(request):
     event_list = AnEvent.objects.all()
     return render(request, 'website/list_events.html', { 'event_list' : event_list})
+    
+    #this currently displays NEW upcoming events
+    #if no new events, then empty
+    #try:
+    #    event = AnEvent.objects.filter(date__gt=datetime.now()).order_by('date')
+    #except:
+    #    event = []
+        
+    return render(request, 'website/list_events.html', {'event': event})
 
 # Provides individual event details
 @login_required
 def detail(request, id):
    event = AnEvent.objects.get(id=id)
-   return render(request, 'website/event_details.html', {'event': event})
+   joined = event.volunteer.filter(id=request.user.id)
+   return render(request, 'website/event_details.html', {'event': event, 'joined': joined})
