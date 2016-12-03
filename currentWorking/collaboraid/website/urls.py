@@ -8,5 +8,7 @@ urlpatterns = [
     url(r'^profile/(?P<username>[\w\-]+)/$', views.profile, name='profile'),
     url(r'^profiles/$', views.list_profiles, name='list_profiles'),
     url(r'^events/$', views.list_events, name='list_events'),
+    url(r'^create_event/$', views.register_event, name = 'create_event'),
+    url(r'^create_complete/$', views.event_complete, name = 'created_event'),
 
 ]

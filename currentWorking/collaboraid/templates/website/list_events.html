@@ -2,15 +2,38 @@
 
 {% load staticfiles %}
 
-{% block title %}Event List{% endblock %}
+{% block title %}Events{% endblock %}
 
 {% block body_block %}
-
 <h1>Events</h1>
-    <ul>
-        {% for event in event_list %}
-            <li>{{event.title}}</li>
-        {% endfor %}
-    <ul>
 
+<div class="panel">
+	{% if event_list %}
+	<div class="panel-heading">
+		<!-- Display search results in an ordered list -->
+		<div class="panel-body">
+			<div class="list-group">
+				{% for event in event_list %}
+				<div class="list-group-item">
+					{% if event.picture %}
+					<img width="64" height="64" src="{{ MEDIA_URL}}{{event.picture}}"/>
+					{% else %}
+					<img width="64" height="64" src="http://combonetwork.com/img/empty_profile.png"/>
+					{% endif %}
+
+				<h4 class="list-group-item-heading">
+                    <p>{{ event.venue }}</p>
+				</h4>
+
+
+
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	{% else %}
+		<p>There are no events currently.</p>
+	{% endif %}
+</div>
 {% endblock %}

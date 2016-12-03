@@ -1,6 +1,6 @@
 from django.contrib import admin
-from website.models import UserProfile, Event
+from website.models import UserProfile
 
 
 admin.site.register(UserProfile)
-admin.site.register(Event)
+

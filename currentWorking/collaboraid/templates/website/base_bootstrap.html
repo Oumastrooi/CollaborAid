@@ -39,6 +39,7 @@
 			{% if user.is_authenticated %}
                 <a class="nav-item nav-link" href="{% url 'profile' user.username %}">Profile</a>
                 <a class="nav-item nav-link" href="{% url 'list_profiles' %}">Volunteer Profiles</a>
+                <a class="nav-item nav-link" href="{% url 'create_event' %}">Create Event</a>
                 <a class="nav-item nav-link" href="{% url 'list_events' %}">Event List</a>
 				<a class="nav-item nav-link" href="{% url 'auth_logout' %}?next=/website/">Logout</a>
 			{% else %}

@@ -13,19 +13,16 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
     
-    
-class Event(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(max_length=1000, default= '')
-    date = models.DateField()
-    start_time = models.TimeField()
-    end_time = models.TimeField()
-    venue = models.CharField(max_length=500)
+class AnEvent(models.Model):
+    event_name = models.CharField(max_length=30)
+    venue = models.CharField(max_length=128, blank=True)
+    address = models.CharField(max_length=100)
+    city = models.CharField(max_length=60)
+    state = models.CharField(max_length=30)
+    website = models.URLField(blank=True)
     picture = models.ImageField(upload_to='event_images', blank=True)
-    volunteer_num = models.IntegerField(default=1)
+    description = models.TextField(max_length=400)
     
-    event_owner = models.ForeignKey(User, on_delete=models.CASCADE)
-
-
+    # Override the __unicode__() method to return out something meaningful!
     def __str__(self):
-        return self.title
+        return self.event_name

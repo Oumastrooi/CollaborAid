@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
-from website.models import UserProfile, Event
-from website.forms import UserProfileForm
+from website.models import UserProfile, AnEvent
+from website.forms import UserProfileForm, AnEventForm
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -92,24 +92,27 @@ def profile(request, username):
     return render(request, 'website/profile.html', {'userprofile': userprofile, 'selecteduser': user, 'form': form})
 
 @login_required
-def join(request, event_id):
-    try:
-        # already joined
-        event = Event.objects.get(id=event_id, guest=request.user)
-        message = "You have already joined this event"
-    except Event.DoesNotExist as e:
-        # Event exists and join
-        try:
-            event = Event.objects.get(id=event_id)
-            event.guest.add(request.user)
+def register_event(request):
+    form = AnEventForm()
+    if request.method == 'POST':
+        form = AnEventForm(request.POST)
+        if form.is_valid():
+            event = form.save(commit=False)
             event.save()
-            message = "You have joined this event"
-        except Event.DoesNotExist as e:
-            message = "Error on event joining"
+            return redirect('created_event')
+        else:
+            print(form.errors)
 
-    event = Event.objects.get(id=event_id)
-    return render(request, 'website/detail.html', {'event': event, 'message': message})
+    context_dict = {'form':form}
+    
+    return render(request, 'website/event_registration.html', context_dict)
 
+@login_required
+def event_complete(request):
+    response = render(request, 'website/creation_complete.html')
+    
+    return response
+    
 @login_required
 def list_profiles(request):
     userprofile_list = UserProfile.objects.all()
@@ -117,5 +120,5 @@ def list_profiles(request):
 
 @login_required
 def list_events(request):
-    event_list = Event.objects.all()
+    event_list = AnEvent.objects.all()
     return render(request, 'website/list_events.html', { 'event_list' : event_list})
