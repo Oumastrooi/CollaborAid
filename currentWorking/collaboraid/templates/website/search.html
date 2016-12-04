@@ -1,0 +1,40 @@
+
+{% load staticfiles %}
+
+{% block title %} Search {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-12">
+			{% if messages %}
+			<div class="alert alert-danger" role="alert">
+			    {% for message in messages %}
+			    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+			    {% endfor %}
+			</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="row" >
+		<div class="col-sm-12">
+			<form method="post" action="" class="form-inline">
+				{% csrf_token %}
+				<div class="form-group">
+					<select class="form-control" id="parameterSelect" name="parameter">
+				      <option>Event Name</option>
+				      <option>Username</option>
+				      <option>Venue</option>
+				      <option>Address</option>
+				    </select>
+				</div>
+				<div class="form-group">
+					<input name="query" type="text" class="form-control" id="queryText" placeholder="Enter search query">
+				</div>
+				<div class="form-group">
+					<input type="submit" value="Submit" class="btn btn-primary">
+				</div>
+			</form>
+		</div>
+	</div>
+{% endblock content %}

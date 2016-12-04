@@ -1,5 +1,7 @@
 from django import forms
 from website.models import UserProfile, AnEvent
+from django.db.models import Q
+
 
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=False)
@@ -31,3 +33,14 @@ class AnEventForm(forms.ModelForm):
     class Meta:
         model = AnEvent
         exclude = ('volunteer',)
+
+PARAMETER_CHOICES = (
+    ('event_name', 'Event Name'),
+    ('username', 'Username'),
+    ('venue', 'Venue'),
+    ('address', 'Address'),
+)
+
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Search query', max_length=255)
+    parameter = forms.ChoiceField(label='Search parameter', choices=PARAMETER_CHOICES)
