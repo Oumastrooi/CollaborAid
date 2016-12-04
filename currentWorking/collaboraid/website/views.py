@@ -164,6 +164,7 @@ def list_profiles(request):
     userprofile_list = UserProfile.objects.all()
     return render(request, 'website/list_profiles.html', { 'userprofile_list' : userprofile_list})
 
+@login_required
 def list_events(request):
     event_list = AnEvent.objects.all()
     return render(request, 'website/list_events.html', { 'event_list' : event_list})

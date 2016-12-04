@@ -22,13 +22,12 @@ class AnEventForm(forms.ModelForm):
     address = forms.CharField(required=True)
     city = forms.CharField(required=True)
     state = forms.CharField(required=True)
-    
+     start_time = forms.TimeField(required=True)
+    end_time = forms.TimeField(required=True)
     #month = forms.CharField(required=True)
     #day = forms.DateField(required=True)
     #year = forms.DateField(required=True)
     date = forms.DateField(required=True)
-    start_time = forms.TimeField(required=True)
-    end_time = forms.TimeField(required=True)
     
     class Meta:
         model = AnEvent

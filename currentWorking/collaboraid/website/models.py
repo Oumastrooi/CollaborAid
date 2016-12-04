@@ -27,7 +27,10 @@ class AnEvent(models.Model):
     city = models.CharField(max_length=60)
     state = models.CharField(max_length=30)
     
-    volunteer = models.ManyToManyField(User, blank=True)
+    start_time = models.TimeField(("Start Time"),auto_now = True, blank=False)
+    end_time = models.TimeField(("End Time"), blank=False)
+    
+# volunteer = models.ManyToManyField(User, blank=True)
 
     #month=models.CharField(
     #    max_length = 12)
@@ -39,9 +42,6 @@ class AnEvent(models.Model):
     
     date = models.DateField(("Date"), auto_now_add=True, blank=False)
     
-    start_time = models.TimeField(("Start Time"), auto_now = True, blank=False)
-    end_time = models.TimeField(("End Time"), blank=False)
-
     # Override the __unicode__() method to return out something meaningful!
     def __str__(self):
         return self.event_name
