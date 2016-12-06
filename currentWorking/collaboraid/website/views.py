@@ -1,12 +1,13 @@
-from django.shortcuts import render
-from django.shortcuts import redirect
+from django.shortcuts import render, redirect, render_to_response
 from django.core.urlresolvers import reverse
 from website.models import UserProfile, AnEvent
-from website.forms import UserProfileForm, AnEventForm
+from website.forms import UserProfileForm, AnEventForm, SearchForm
 from registration.backends.simple.views import RegistrationView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from datetime import datetime
+from django.contrib import messages
+from django.http import HttpResponseRedirect
 
 # Create your views here.
 
@@ -15,7 +16,6 @@ def index(request):
     
     return response
     
-
 def about(request):
     return render(request, 'website/about.html',{})
     
@@ -192,3 +192,51 @@ def detail(request, id):
    event = AnEvent.objects.get(id=id)
    joined = event.volunteer.filter(id=request.user.id)
    return render(request, 'website/event_details.html', {'event': event, 'joined': joined})
+
+
+# helper functions
+def search_by_event_name(query):
+    results = AnEvent.objects.filter(event_name__icontains=query)
+    return results
+
+def search_by_username(query):
+    results = UserProfile.objects.filter(user__icontains=query)
+    return results
+
+def search_by_address(query):
+    results = AnEvent.objects.filter(address__icontains=query)
+    return results
+
+def search_by_venue(query):
+    results = AnEvent.objects.filter(venue__icontains=query)
+    return results
+
+@login_required
+def search(request):
+    if request.method == 'GET':
+        return render(request, 'website/search.html')
+    else:
+        # validate submitted form
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            parameter = form.cleaned_data['parameter']
+
+            if parameter == 'Event Name' and query is not None:
+                res = search_by_event_name(query)
+                return render(request, 'results.html', {'query': query, 'results': res})
+            elif parameter == 'Username' and query is not None:
+                res = search_by_username(query)
+                return render(request, 'results.html', {'query': query, 'results': res})
+            elif parameter == 'Address' and query is not None:
+                res = search_by_address(query)
+                return render(request, 'results.html', {'query': query, 'results': res})
+            elif parameter == 'Venue' and query is not None:
+                res = search_by_venue(query)
+                return render(request, 'results.html', {'query': query, 'results': res})
+            else:
+                messages.error(request, 'Invalid input.')
+                return HttpResponseRedirect('/')
+        else:
+            messages.error(request, 'Invalid input.')
+            return HttpResponseRedirect('/')

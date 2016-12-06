@@ -1,0 +1,24 @@
+{% extends 'website/base_bootstrap.html' %}
+
+{% load staticfiles %}
+
+{% block title %} Search Results {% endblock %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-12">
+			<p>Search results for "{{query}}" :</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-sm-12">
+			{% if results %}
+				{% for i in results %}
+					<p>{{i.event_name}} <span>: {{i.description}}</span></p>
+				{% endfor %}
+			{% else %}
+				No Results...
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

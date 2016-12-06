@@ -1,5 +1,7 @@
 from django import forms
 from website.models import UserProfile, AnEvent
+from django.db.models import Q
+import re
 
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=False)
@@ -21,9 +23,6 @@ class AnEventForm(forms.ModelForm):
     city = forms.CharField(required=True)
     state = forms.CharField(required=True)
     
-    #month = forms.CharField(required=True)
-    #day = forms.DateField(required=True)
-    #year = forms.DateField(required=True)
     date = forms.DateField(required=True)
     start_time = forms.TimeField(required=True)
     end_time = forms.TimeField(required=True)
@@ -31,3 +30,14 @@ class AnEventForm(forms.ModelForm):
     class Meta:
         model = AnEvent
         exclude = ('volunteer',)
+        
+CHOICES = (
+    ('event_name', 'Event'),
+    ('username', 'Username'),
+    ('venue', 'Venue'),
+    ('address', 'Address'),
+)
+
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Search query', max_length=200)
+    parameter = forms.ChoiceField(label='Search parameter', choices=CHOICES)

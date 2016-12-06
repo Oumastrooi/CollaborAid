@@ -29,11 +29,6 @@ class AnEvent(models.Model):
     
     volunteer = models.ManyToManyField(User, blank=True)
 
-    #month=models.CharField(
-    #    max_length = 12)
-    #day=models.DateField(max_length = 2)
-    #year=models.DateField(max_length = 4)
-
     date = models.DateField(default=date.today)
     start_time = models.TimeField(help_text='ex: 10:30 for 10:30 AM', default=datetime.time(00, 00))
     end_time = models.TimeField(help_text='ex: 13:30 for 1:30 PM', default=datetime.time(00, 00))

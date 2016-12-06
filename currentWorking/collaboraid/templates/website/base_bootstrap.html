@@ -33,13 +33,16 @@
             </div>
             <div>
                 <ul class="nav navbar-nav">
-                    <li><a class="navbar-brand" href="{% url 'about' %}">About</a> {% if user.is_authenticated %}
+                    <li><a class="navbar-brand" href="{% url 'about' %}">About</a> 
+                        {% if user.is_authenticated %}
                         <li><a class="navbar-brand" href="{% url 'profile' user.username %}">Profile</a></li>
                         <li><a class="navbar-brand" href="{% url 'list_profiles' %}">Volunteer Profiles</a></li>
                         <li><a class="navbar-brand" href="{% url 'create_event' %}">Create Event</a></li>
                         <li> <a class="navbar-brand" href="{% url 'list_events' %}">Event List</a></li>
                         <li> <a class="navbar-brand" href="{% url 'user_events' request.user.id %}">My Events</a></li>
-                        <li> <a class="navbar-brand" href="{% url 'auth_logout' %}?next=/website/">Logout</a> </li>{% else %}
+                        <li> <a class="navbar-brand" href="{% url 'search' %}">Search</a></li>
+                        <li> <a class="navbar-brand" href="{% url 'auth_logout' %}?next=/website/">Logout</a> </li>
+                        {% else %}
                         <li> <a class="navbar-brand" href="{% url 'registration_register' %}">Register</a></li>
                         <li> <a class="navbar-brand" href="{% url 'auth_login' %}">Login</a> </li>{% endif %}
                 </ul>
