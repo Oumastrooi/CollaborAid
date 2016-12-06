@@ -175,7 +175,7 @@ def list_events(request):
     #except:
     #    event = []
         
-    return render(request, 'website/list_events.html', {'event': event})
+    #return render(request, 'website/list_events.html', {'event': event})
 
 @login_required
 def user_event(request, user_id):
@@ -204,14 +204,16 @@ def search(request):
         form = SearchForm(request.POST)
         
         if form.is_valid():
-            query = form.cleaned_data['query']
+            query = form.cleaned_data['q']
             parameter = form.cleaned_data['parameter']
 
             if parameter == 'Events' and query is not None:
-                results = AnEvent.objects.filter(Q(event_name__icontains=your_search_query) | Q(address__icontains=your_search_query) | Q(venue__icontains=your_search_query)).order_by('date')
+                results = AnEvent.objects.filter(Q(event_name__icontains=query) | Q(address__icontains=query) | Q(venue__icontains=query)).order_by('date')
+                
                 return render(request, 'website/results.html', {'query': query, 'results': res})
             elif parameter == 'Users' and query is not None:
-                results = UserProfile.objects.filter(Q(first_name__icontains=your_search_query) )            
+                results = UserProfile.objects.filter(Q(first_name__icontains=query) )    
+                
                 return render(request, 'website/results.html', {'query': query, 'results': res})
             else:
                 messages.error(request, 'Invalid input.')
