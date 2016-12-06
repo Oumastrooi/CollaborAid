@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
 from django.http import HttpResponseRedirect
+from website.utils import get_query
 
 # Create your views here.
 
@@ -224,16 +225,16 @@ def search(request):
 
             if parameter == 'Event Name' and query is not None:
                 res = search_by_event_name(query)
-                return render(request, 'results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': res})
             elif parameter == 'Username' and query is not None:
                 res = search_by_username(query)
-                return render(request, 'results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': res})
             elif parameter == 'Address' and query is not None:
                 res = search_by_address(query)
-                return render(request, 'results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': res})
             elif parameter == 'Venue' and query is not None:
                 res = search_by_venue(query)
-                return render(request, 'results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': res})
             else:
                 messages.error(request, 'Invalid input.')
                 return HttpResponseRedirect('/')
