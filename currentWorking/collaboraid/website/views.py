@@ -9,6 +9,7 @@ from datetime import datetime
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from website.utils import get_query
+from django.db.models import Q
 
 # Create your views here.
 
@@ -194,24 +195,6 @@ def detail(request, id):
    joined = event.volunteer.filter(id=request.user.id)
    return render(request, 'website/event_details.html', {'event': event, 'joined': joined})
 
-
-# helper functions
-def search_by_event_name(query):
-    results = AnEvent.objects.filter(event_name__icontains=query)
-    return results
-
-def search_by_username(query):
-    results = UserProfile.objects.filter(user__icontains=query)
-    return results
-
-def search_by_address(query):
-    results = AnEvent.objects.filter(address__icontains=query)
-    return results
-
-def search_by_venue(query):
-    results = AnEvent.objects.filter(venue__icontains=query)
-    return results
-
 @login_required
 def search(request):
     if request.method == 'GET':
@@ -219,21 +202,16 @@ def search(request):
     else:
         # validate submitted form
         form = SearchForm(request.POST)
+        
         if form.is_valid():
             query = form.cleaned_data['query']
             parameter = form.cleaned_data['parameter']
 
-            if parameter == 'Event Name' and query is not None:
-                res = search_by_event_name(query)
+            if parameter == 'Events' and query is not None:
+                results = AnEvent.objects.filter(Q(event_name__icontains=your_search_query) | Q(address__icontains=your_search_query) | Q(venue__icontains=your_search_query)).order_by('date')
                 return render(request, 'website/results.html', {'query': query, 'results': res})
-            elif parameter == 'Username' and query is not None:
-                res = search_by_username(query)
-                return render(request, 'website/results.html', {'query': query, 'results': res})
-            elif parameter == 'Address' and query is not None:
-                res = search_by_address(query)
-                return render(request, 'website/results.html', {'query': query, 'results': res})
-            elif parameter == 'Venue' and query is not None:
-                res = search_by_venue(query)
+            elif parameter == 'Users' and query is not None:
+                results = UserProfile.objects.filter(Q(first_name__icontains=your_search_query) )            
                 return render(request, 'website/results.html', {'query': query, 'results': res})
             else:
                 messages.error(request, 'Invalid input.')

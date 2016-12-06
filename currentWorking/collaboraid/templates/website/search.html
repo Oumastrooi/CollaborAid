@@ -4,7 +4,6 @@ Search
 {% endblock %}
 
 {% block body_block %}
-<div class ="body-block">
     {% if messages %}
     <div class="alert alert-danger" role="alert">
         {% for message in messages %}
@@ -16,17 +15,14 @@ Search
 	<div class="row" >
 		<div class="col-sm-12">
 			<form method="get" action="" class="form-inline">
-				{% csrf_token %}
 				<div class="form-group">
 					<select class="form-control" id="parameterSelect" name="parameter">
-				      <option>Event</option>
-				      <option>Username</option>
-				      <option>Venue</option>
-				      <option>Address</option>
+				      <option>Events</option>
+				      <option>Users</option>
 				    </select>
 				</div>
 				<div class="form-group">
-					<input name="query" type="text" class="form-control" id="queryText" placeholder="Enter search keyword">
+					<input name="q" type="text" class="form-control" id="queryText" placeholder="Enter search keyword">
 				</div>
 				<div class="form-group">
 					<input type="submit" value="Search" class="btn">
@@ -34,6 +30,5 @@ Search
 			</form>
 		</div>
 	</div>
-</div>
 
 {% endblock %}
