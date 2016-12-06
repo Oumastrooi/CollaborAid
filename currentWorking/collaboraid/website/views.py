@@ -210,11 +210,11 @@ def search(request):
             if parameter == 'Events' and query is not None:
                 results = AnEvent.objects.filter(Q(event_name__icontains=query) | Q(address__icontains=query) | Q(venue__icontains=query)).order_by('date')
                 
-                return render(request, 'website/results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': results})
             elif parameter == 'Users' and query is not None:
                 results = UserProfile.objects.filter(Q(first_name__icontains=query) )    
                 
-                return render(request, 'website/results.html', {'query': query, 'results': res})
+                return render(request, 'website/results.html', {'query': query, 'results': results})
             else:
                 messages.error(request, 'Invalid input.')
                 return HttpResponseRedirect('/')
