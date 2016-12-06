@@ -41,6 +41,7 @@
                 <a class="nav-item nav-link" href="{% url 'list_profiles' %}">Volunteer Profiles</a>
                 <a class="nav-item nav-link" href="{% url 'create_event' %}">Create Event</a>
                 <a class="nav-item nav-link" href="{% url 'list_events' %}">Event List</a>
+                <a class="nav-item nav-link" href="{% url 'user_events' request.user.id %}">My Events</a>
 				<a class="nav-item nav-link" href="{% url 'auth_logout' %}?next=/website/">Logout</a>
 			{% else %}
 				<a class="nav-item nav-link" href="{% url 'registration_register' %}">Register</a>

@@ -175,6 +175,17 @@ def list_events(request):
         
     return render(request, 'website/list_events.html', {'event': event})
 
+@login_required
+def user_event(request, user_id):
+   try:
+       event_list = AnEvent.objects.filter(volunteer__id=user_id)
+       user = User.objects.get(id=user_id)
+   except:
+       event_list = []
+       user = {}
+
+   return render(request, 'website/user_events.html', {'event_list': event_list, 'user': user})
+
 # Provides individual event details
 @login_required
 def detail(request, id):

@@ -13,5 +13,5 @@ urlpatterns = [
     url(r'^events/(?P<id>\d+)/$', views.detail, name='event_detail'),
     url(r'^events/join/(?P<event_id>\d+)/$', views.join, name='event_join'),
     url(r'^events/cancel/(?P<event_id>\d+)/$', views.cancel, name='event_cancel'),
-
+    url(r'^user_events/(?P<user_id>\d+)/$', views.user_event, name='user_events'),
 ]
