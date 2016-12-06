@@ -1,5 +1,5 @@
  {% extends 'website/base.html' %} {% load staticfiles %} {% block title_block %} Index {% endblock %} {% block body_block %}
-
+<div class ="body-block">
 <div class="jumbotron">
     <h1 class="display-3">Welcome!</h1>
     <img src={% static "images/logo.png" %} alt="logo" class="thumbnail"> {% if user.is_authenticated %}
@@ -9,5 +9,5 @@
     <a href={% url 'registration_register' %} type="button" class="btn btn-success">Start volunteering today</button></a> {% endif %}
 
 </div>
-
+</div>
 {% endblock %}

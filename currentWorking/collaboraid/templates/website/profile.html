@@ -5,6 +5,7 @@
 {% block title %}{{ user.username }} Profile{% endblock %}
 
 {% block body_block %}
+<div class ="body-block">
 	<div class="page-header">
 		<h1>{{selecteduser.username}} Profile</h1>
 	</div>
@@ -26,4 +27,5 @@
             <p><strong>Email:</strong> {{selecteduser.email}}</p>
 		{% endif %}
 	</div>
+</div>
 {% endblock %}
