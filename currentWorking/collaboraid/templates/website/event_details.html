@@ -8,27 +8,27 @@
 
 			<h2>{{event.event_name}}</h2>
             <p></p>
-			<strong>Date: {{event.date}}</strong> <br />
-        	<strong>Venue : {{event.venue}}</strong> <br />
-            <strong>Start time : {{event.start_time}}</strong> <br />
-            <strong>End time : {{event.end_time}}</strong> <br />
-            <strong>Description : {{event.description}}</strong> <br />
+			Date: {{event.date}}<br />
+        	Venue : {{event.venue}}<br />
+            Start time : {{event.start_time}}<br />
+            End time : {{event.end_time}}<br />
+            Description : {{event.description}}<br />
                 
             <p clss="msg">{% if request.GET.msg %} {{request.GET.msg }} {% endif %}</p>
             {% if not joined %}
-            <a href="{% url 'event_join' event.id %}" class="btn join">Yes, Attend</a>
+                <a href="{% url 'event_join' event.id %}" class="btn join">Yes, Attend</a>
             {% else %}
-            <a href="{% url 'event_cancel' event.id %}" class="btn join">No, Not Attend</a>
+                <a href="{% url 'event_cancel' event.id %}" class="btn join">No, Not Attend</a>
             {% endif %}
 
             <p></p>
 
             <div class="user">
-                <h3>Volunteers Needed: {{event.volunteer_num}}</h3>
+                <h4>Volunteers Needed: {{event.volunteer_num}}</h4>
                 <h3>Users Attending:</h3>
                 <ol>
                     {% for volunteer in event.volunteer.all %}
-                    <li> {{ volunteer.username }} </li>
+                        <li> {{ volunteer.username }} </li>
                     {% endfor %}
                 </ol>
             </div>
