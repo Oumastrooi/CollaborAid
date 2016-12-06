@@ -13,7 +13,7 @@ Search
     {% endif %}
 
 	<div class="row" >
-			<form method="GET" action="" class="form-inline">
+			<form method="get" action="" class="form-inline">
 				<div class="form-group">
 					<select class="form-control" id="parameterSelect" name="parameter">
 				      <option>Events</option>
@@ -21,7 +21,7 @@ Search
 				    </select>
 				</div>
 				<div class="form-group">
-					<input name="q" type="text" class="form-control" id="queryText" placeholder="Enter search keyword" value=""/>
+					<input name="q" type="text" class="form-control" id="queryText" placeholder="Enter search keyword" value='{{ request.GET.q}}'/>
 					<input type="submit" value="Search" class="btn">
 				</div>
 			</form>

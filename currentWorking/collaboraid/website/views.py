@@ -208,7 +208,8 @@ def search(request):
             parameter = form.cleaned_data['parameter']
 
             if parameter == 'Events' and query is not None:
-                results = AnEvent.objects.filter(Q(event_name__icontains=query) | Q(address__icontains=query) | Q(venue__icontains=query)).order_by('date')
+                results = AnEvent.objects.filter(
+                    Q(event_name__icontains=query) | Q(address__icontains=query) | Q(venue__icontains=query)).order_by('date')
                 
                 return render(request, 'website/results.html', {'query': query, 'results': results})
             elif parameter == 'Users' and query is not None:
