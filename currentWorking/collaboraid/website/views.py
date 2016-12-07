@@ -234,7 +234,7 @@ def search(request):
             Q(address__icontains=query) |
             Q(city__icontains=query) |
             Q(state__icontains=query)
-            ).distinct()
+            )
 
     context = {
         "query" : query,

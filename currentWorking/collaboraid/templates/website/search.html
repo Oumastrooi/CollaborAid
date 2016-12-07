@@ -1,19 +1,19 @@
 
-{% block title %}Search{% endblock %}
 
 {% block content %}
 
 <div class ="body-block">
+<h1>Search</h1>
         <div class="row">
             <div class="col-sm-12">
-                <p>Search results for "{{ query }}" :</p>
+                <h3>Search results for "{{ query }}" :</h3>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-12">
                 {% if results %}
                     {% for i in results %}
-                        <p>{{i.event_name}} <span>: {{i.description}}</span></p>
+                    <p>{{i.event_name}} <span>: {{i.description}}</span></p>
                     {% endfor %}
                 {% else %}
                     No results found.
