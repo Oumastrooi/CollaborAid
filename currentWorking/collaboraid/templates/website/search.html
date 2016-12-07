@@ -6,7 +6,7 @@
 <div class ="body-block">
         <div class="row">
             <div class="col-sm-12">
-                <h3>Search results for "{{ query }}" :</h3>
+            <h3>Search results for "{{ query }}" :</h3>
             </div>
         </div>
         <div class="row">
@@ -14,7 +14,11 @@
                 {% if results %}
                     {% for i in results %}
                     <h3><a href="{% url 'event_detail' i.id %}">{{i.event_name}}</a></h3>
-                    <p>{{i.event_name}} <span>: {{i.description}}</span></p>
+                    {% if event.picture %}
+					<img width="128" height="128" src="{{ MEDIA_URL}}{{event.picture}}"/>
+					{% else %}
+					<img width="128" height="128" src="http://www.artconnect.com/assets/default/default_event_list-af5a65d1bb7f64798e5dd5b6e3e3d091.png"/>
+                    {% endif %}
                     {% endfor %}
                 {% else %}
                     No results found.
