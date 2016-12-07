@@ -254,4 +254,4 @@ def search(request):
         "object_list" : queryset_list
     }
     
-    return render(request, "search/results.html", context)
+    return render(request, "website/search.html", context)

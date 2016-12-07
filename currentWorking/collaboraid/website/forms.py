@@ -29,12 +29,6 @@ class AnEventForm(forms.ModelForm):
     class Meta:
         model = AnEvent
         exclude = ('volunteer',)
-        
-CHOICES = [
-    ('events', 'Events'),
-    ('users', 'Users'),
-]
 
 class SearchForm(forms.Form):
     query = forms.CharField(label='Search query', max_length=200)
-    parameter = forms.ChoiceField(label='Search parameter', choices=CHOICES)

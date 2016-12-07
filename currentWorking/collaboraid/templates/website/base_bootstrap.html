@@ -29,7 +29,7 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">CollaborAid</a>
+                <a class="navbar-brand" href="/">CollaborAid</a>
             </div>
             <div>
                 <ul class="nav navbar-nav">
@@ -42,14 +42,13 @@
                         <li> <a class="navbar-brand" href="{% url 'user_events' request.user.id %}">My Events</a></li>
                         <li> <a class="navbar-brand" href="{% url 'auth_logout' %}?next=/website/">Logout</a> </li>
                     
-    <div class="row" >
-			<form method="get" action="." class="form-inline">
+			<form method="get" action="" class="navbar-form pull-right">
 				<div class="form-group">
-					<input name="q" type="text" class="form-control" id="q" placeholder="Enter search keyword" value='{{ request.GET.q }}'/>
+					<input name="q" type="text" class="form-control" id="q" placeholder="Enter search keyword" 
+                           value='{{ request.GET.q }}'/>
 					<input type="submit" value="Search" class="btn">
 				</div>
 			</form>
-	</div>
                     
                         {% else %}
                         <li> <a class="navbar-brand" href="{% url 'registration_register' %}">Register</a></li>

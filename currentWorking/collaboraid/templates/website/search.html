@@ -1,24 +1,26 @@
+{% extends 'website/base_bootstrap.html' %}
 
-{% block title_block %}
-Search
-{% endblock %}
+{% load staticfiles %}
 
-{% block body_block %}
-    {% if messages %}
-    <div class="alert alert-danger" role="alert">
-        {% for message in messages %}
-            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-        {% endfor %}
-    </div>
-    {% endif %}
+{% block title %} Search Results {% endblock %}
 
-	<div class="row" >
-			<form method="get" action="" class="form-inline">
-				<div class="form-group">
-					<input name="q" type="text" class="form-control" id="queryText" placeholder="Enter search keyword" value='{{ request.GET.q}}'/>
-					<input type="submit" value="Search" class="btn">
-				</div>
-			</form>
-	</div>
-
-{% endblock %}
+{% block content %}
+<div class ="body-block">
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Search results for "{{ query }}" :</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {% if queryset_list %}
+                    {% for i in queryset_list %}
+                        <p>{{i.event_name}} <span>: {{i.description}}</span></p>
+                    {% endfor %}
+                {% else %}
+                    No results found.
+                {% endif %}
+            </div>
+        </div>
+</div>
+{% endblock content %}
