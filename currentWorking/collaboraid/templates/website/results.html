@@ -6,21 +6,21 @@
 
 {% block content %}
 <div class ="body-block">
-	<div class="row">
-		<div class="col-sm-12">
-			<p>Search results for "{{query}}" :</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-12">
-			{% if results %}
-				{% for i in results %}
-					<p>{{i.event_name}} <span>: {{i.description}}</span></p>
-				{% endfor %}
-			{% else %}
-				No Results...
-			{% endif %}
-		</div>
-	</div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Search results for "{{ query }}" :</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                {% if queryset_list %}
+                    {% for i in queryset_list %}
+                        <p>{{i.event_name}} <span>: {{i.description}}</span></p>
+                    {% endfor %}
+                {% else %}
+                    No results found.
+                {% endif %}
+            </div>
+        </div>
 </div>
 {% endblock content %}
