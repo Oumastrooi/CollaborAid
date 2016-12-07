@@ -1,10 +1,8 @@
-{% extends 'website/base_bootstrap.html' %}
 
-{% load staticfiles %}
-
-{% block title %} Search Results {% endblock %}
+{% block title %}Search{% endblock %}
 
 {% block content %}
+
 <div class ="body-block">
         <div class="row">
             <div class="col-sm-12">
@@ -13,8 +11,8 @@
         </div>
         <div class="row">
             <div class="col-sm-12">
-                {% if queryset_list %}
-                    {% for i in queryset_list %}
+                {% if results %}
+                    {% for i in results %}
                         <p>{{i.event_name}} <span>: {{i.description}}</span></p>
                     {% endfor %}
                 {% else %}

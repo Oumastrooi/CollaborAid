@@ -223,35 +223,22 @@ def search(request):
 #            messages.error(request, 'Invalid input.')
 #            return HttpResponseRedirect('/')
 
-    queryset_list = AnEvent.objects.all()
+    results = AnEvent.objects.all()
 
-    query = request.GET.get("q")
+    query = request.GET.get('q')
     
     if query:
-        queryset_list = queryset_list.filter(
+        results = results.filter(
             Q(event_name__icontains=query)|
             Q(venue__icontains=query)|
             Q(address__icontains=query) |
             Q(city__icontains=query) |
             Q(state__icontains=query)
             ).distinct()
-    
-#    paginator = Paginator(queryset_list, 10)
-#    page_request_var = "page"
-#    page = request.GET.get(page_request_var)
-#    
-#    try:
-#        queryset = paginator.page(page)
-#    except PageNotAnInteger:
-#        # If page is not an integer, deliver first page.
-#        queryset = paginator.page(1)
-#    except EmptyPage:
-#        # If page is out of range (e.g. 9999), deliver last page of results.
-#        queryset = paginator.page(paginator.num_pages)
 
     context = {
         "query" : query,
-        "object_list" : queryset_list
+        "results" : results
     }
     
     return render(request, "website/search.html", context)

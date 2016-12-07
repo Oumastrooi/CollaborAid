@@ -42,7 +42,7 @@
                         <li> <a class="navbar-brand" href="{% url 'user_events' request.user.id %}">My Events</a></li>
                         <li> <a class="navbar-brand" href="{% url 'auth_logout' %}?next=/website/">Logout</a> </li>
                     
-			<form method="get" action="" class="navbar-form pull-right">
+			<form method="GET" action="{% url 'search' %}" class="navbar-form pull-right">
 				<div class="form-group">
 					<input name="q" type="text" class="form-control" id="q" placeholder="Enter search keyword" 
                            value='{{ request.GET.q }}'/>

@@ -31,4 +31,4 @@ class AnEventForm(forms.ModelForm):
         exclude = ('volunteer',)
 
 class SearchForm(forms.Form):
-    query = forms.CharField(label='Search query', max_length=200)
+    query = forms.CharField(max_length=200)
