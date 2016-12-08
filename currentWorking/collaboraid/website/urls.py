@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'^events/cancel/(?P<event_id>\d+)/$', views.cancel, name='event_cancel'),
     url(r'^user_events/(?P<user_id>\d+)/$', views.user_event, name='user_events'),
     url(r'^search/$', views.search, name='search'),
-    
+    url(r'^usersearch/$', views.user_search, name='user_search'),
+
 ]

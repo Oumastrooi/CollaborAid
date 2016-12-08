@@ -223,22 +223,82 @@ def search(request):
 #            messages.error(request, 'Invalid input.')
 #            return HttpResponseRedirect('/')
 
-    results = AnEvent.objects.all()
+#    results = AnEvent.objects.all()
+#
+#    query = request.GET.get('q')
+#    
+#    if query:
+#        results = results.filter(
+#            Q(event_name__icontains=query)|
+#            Q(venue__icontains=query)|
+#            Q(address__icontains=query) |
+#            Q(city__icontains=query) |
+#            Q(state__icontains=query)
+#            )
+#
+#    context = {
+#        "query" : query,
+#        "results" : results
+#    }
+#    
+#    return render(request, "website/search.html", context)
 
-    query = request.GET.get('q')
-    
-    if query:
-        results = results.filter(
-            Q(event_name__icontains=query)|
-            Q(venue__icontains=query)|
-            Q(address__icontains=query) |
-            Q(city__icontains=query) |
-            Q(state__icontains=query)
-            )
+    # validate submitted form
+    form = SearchForm()
 
-    context = {
-        "query" : query,
-        "results" : results
-    }
+    if form.is_valid():
+
+        results = AnEvent.objects.all()
+
+        query = request.GET.get('q')
+
+        if query:
+            results = results.filter(
+                Q(event_name__icontains=query)|
+                Q(venue__icontains=query)|
+                Q(address__icontains=query) |
+                Q(city__icontains=query) |
+                Q(state__icontains=query) |
+                Q(description__icontains=query)
+                ).order_by("date")
+
+        context = {
+            "query" : query,
+            "results" : results
+        }
+
+        return render(request, "website/search.html", context)
+
+    else:
+        messages.error(request, 'Invalid input.')
+        return HttpResponseRedirect('/')
     
-    return render(request, "website/search.html", context)
+@login_required
+def user_search(request):
+    
+    # validate submitted form
+    form = SearchForm()
+
+    if form.is_valid():
+        
+        res = UserProfile.objects.all()
+
+        query = request.GET.get('q')
+
+        if query:
+            res = res.filter(
+                Q(first_name__icontains=query)|
+                Q(last_name__icontains=query) |
+                Q(id__icontains=query)
+                ).order_by("user")
+
+        context = {
+            "query" : query,
+            "res" : res
+        }
+
+        return render(request, "website/user_search_results.html", context)
+    
+    else:
+        messages.error(request, 'Invalid input.')
+        return HttpResponseRedirect('/')

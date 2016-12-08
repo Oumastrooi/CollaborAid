@@ -1,0 +1,29 @@
+
+{% block title %}Search Users{% endblock %}
+
+{% block content %}
+
+<div class ="body-block">
+    <div class="row">
+    <div class="col-sm-12">
+    <h3>Searched user database for "{{ query }}" :</h3>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            {% if res %}
+                {% for i in res %}
+                <p><a href="{% url 'profile' i.user.username %}">{{ i.user.username }}</a></p>
+                    {% if i.picture %}
+                    <img width="128" height="128" src="{{ MEDIA_URL}}{{i.picture}}"/>
+                    {% else %}
+                    <img width="128" height="128" src="http://combonetwork.com/img/empty_profile.png"/>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                No results found.
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
