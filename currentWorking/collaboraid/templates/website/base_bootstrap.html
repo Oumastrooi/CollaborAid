@@ -44,7 +44,7 @@
                     
     <form method="GET" action="{% url 'search' %}" class="navbar-form pull-right">
         <div class="form-group">
-            <input name="q" type="text" class="form-control" id="q" placeholder="Enter search keyword" 
+            <input name="q" type="text" class="form-control" id="q" placeholder="Search events..." 
                    value='{{ request.GET.q }}'/>
             <input type="submit" value="Search" class="btn">
         </div>
