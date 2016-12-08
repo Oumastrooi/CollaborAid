@@ -31,15 +31,15 @@
             <div class="navbar-header">
                 <ul class="nav navbar-nav">
                     <li> <a class="navbar-brand" href="{% url 'index' %}">Home</a></li>
-                    <li> <a class="navbar-brand" href="{% url 'about' %}">About</a> {% if user.is_authenticated %}
+                    <li> <a class="navbar-brand" href="{% url 'about' %}">About</a> 
+                        {% if user.is_authenticated %}
                         <li> <a class="navbar-brand" href="{% url 'profile' user.username %}">Profile</a></li>
                         <li> <a class="navbar-brand" href="{% url 'list_profiles' %}">Volunteer Profiles</a></li>
                         <li> <a href="{% url 'create_event' %}">Create Event</a></li>
                         <li> <a href="{% url 'list_events' %}">Event List</a></li>
                         <li> <a href="{% url 'user_events' request.user.id %}">My Events</a></li>
-                        <li> <a href="{% url 'auth_logout' %}?next=/website/"> Logout  </a></li> {% else %}
-                        <li> <a class="navbar-brand" href="{% url 'registration_register' %}">Register</a></li>
-                        <li> <a class="navbar-brand" href="{% url 'auth_login' %}">Login</a> </li>{% endif %}
+                        <li> <a href="{% url 'auth_logout' %}?next=/website/"> Logout  </a></li> 
+
                 </ul>
             </div>
             <form method="GET" action="{% url 'search' %}" class="navbar-form">
@@ -48,11 +48,12 @@
                     <input type="submit" value="Search" class="btn btn-primary">
                 </div>
             </form>
-
-
-
-
-        </div>
+            
+                        {% else %}
+                        <li> <a class="navbar-brand" href="{% url 'registration_register' %}">Register</a></li>
+                        <li> <a class="navbar-brand" href="{% url 'auth_login' %}">Login</a> </li>
+                        {% endif %}
+            
         </div>
     </nav>
 
@@ -67,10 +68,10 @@
     <!-- Footer -->
     <footer class="navbar-fixed-bottom">
 
-        <a href="#"> <img src={ % static "images/facebook.png" %} alt="facebook" class="icons"></a>
-        <a href="#"> <img src={ % static "images/twitter.png" %} alt="facebook" class="icons"></a>
-        <a href="#"> <img src={ % static "images/rss.png" %} alt="facebook" class="icons"></a>
-        <a href="#"> <img src={ % static "images/youtube.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={% static "images/facebook.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={% static "images/twitter.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={% static "images/rss.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={% static "images/youtube.png" %} alt="facebook" class="icons"></a>
 
         <h3>CollaborAid</h3>
 

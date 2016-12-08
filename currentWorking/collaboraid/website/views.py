@@ -8,7 +8,6 @@ from django.contrib.auth.models import User
 from datetime import datetime
 from django.contrib import messages
 from django.http import HttpResponseRedirect
-from website.utils import get_query
 from django.db.models import Q
 
 # Create your views here.
@@ -197,52 +196,6 @@ def detail(request, id):
 
 @login_required
 def search(request):
-#    if request.method == 'GET':
-#        return render(request, 'website/search.html')
-#    else:
-#        # validate submitted form
-#        form = SearchForm(request.POST)
-#        
-#        if form.is_valid():
-#            query = form.cleaned_data['q']
-#            parameter = form.cleaned_data['parameter']
-#
-#            if parameter == 'Events' and query is not None:
-#                results = AnEvent.objects.filter(
-#                    Q(event_name__icontains=query) | Q(address__icontains=query) | Q(venue__icontains=query)).order_by('date')
-#                
-#                return render(request, 'website/results.html', {'query': query, 'results': results})
-#            elif parameter == 'Users' and query is not None:
-#                results = UserProfile.objects.filter(Q(first_name__icontains=query) )    
-#                
-#                return render(request, 'website/results.html', {'query': query, 'results': results})
-#            else:
-#                messages.error(request, 'Invalid input.')
-#                return HttpResponseRedirect('/')
-#        else:
-#            messages.error(request, 'Invalid input.')
-#            return HttpResponseRedirect('/')
-
-#    results = AnEvent.objects.all()
-#
-#    query = request.GET.get('q')
-#    
-#    if query:
-#        results = results.filter(
-#            Q(event_name__icontains=query)|
-#            Q(venue__icontains=query)|
-#            Q(address__icontains=query) |
-#            Q(city__icontains=query) |
-#            Q(state__icontains=query)
-#            )
-#
-#    context = {
-#        "query" : query,
-#        "results" : results
-#    }
-#    
-#    return render(request, "website/search.html", context)
-
     results = AnEvent.objects.all()
 
     query = request.GET.get('q')
