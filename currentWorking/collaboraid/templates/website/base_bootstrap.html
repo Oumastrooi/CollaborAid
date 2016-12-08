@@ -23,61 +23,56 @@
     <link href="http://v4-alpha.getbootstrap.com/examples/dashboard/dashboard.css" rel="stylesheet">
 
 </head>
-    
+
 <body>
 
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="/">CollaborAid</a>
-            </div>
-            <div>
                 <ul class="nav navbar-nav">
-                    <li><a class="navbar-brand" href="{% url 'about' %}">About</a> 
-                        {% if user.is_authenticated %}
-                        <li><a class="navbar-brand" href="{% url 'profile' user.username %}">Profile</a></li>
-                        <li><a class="navbar-brand" href="{% url 'list_profiles' %}">Volunteer Profiles</a></li>
-                        <li><a class="navbar-brand" href="{% url 'create_event' %}">Create Event</a></li>
-                        <li> <a class="navbar-brand" href="{% url 'list_events' %}">Event List</a></li>
-                        <li> <a class="navbar-brand" href="{% url 'user_events' request.user.id %}">My Events</a></li>
-                        <li> <a class="navbar-brand" href="{% url 'auth_logout' %}?next=/website/">Logout</a> </li>
-                    
-    <form method="GET" action="{% url 'search' %}" class="navbar-form pull-right">
-        <div class="form-group">
-            <input name="q" type="text" class="form-control" id="q" placeholder="Search events..." 
-                   value='{{ request.GET.q }}'/>
-            <input type="submit" value="Search" class="btn">
-        </div>
-    </form>
-                    
-                        {% else %}
+                    <li> <a class="navbar-brand" href="{% url 'index' %}">Home</a></li>
+                    <li> <a class="navbar-brand" href="{% url 'about' %}">About</a> {% if user.is_authenticated %}
+                        <li> <a class="navbar-brand" href="{% url 'profile' user.username %}">Profile</a></li>
+                        <li> <a class="navbar-brand" href="{% url 'list_profiles' %}">Volunteer Profiles</a></li>
+                        <li> <a href="{% url 'create_event' %}">Create Event</a></li>
+                        <li> <a href="{% url 'list_events' %}">Event List</a></li>
+                        <li> <a href="{% url 'user_events' request.user.id %}">My Events</a></li>
+                        <li> <a href="{% url 'auth_logout' %}?next=/website/"> Logout  </a></li> {% else %}
                         <li> <a class="navbar-brand" href="{% url 'registration_register' %}">Register</a></li>
                         <li> <a class="navbar-brand" href="{% url 'auth_login' %}">Login</a> </li>{% endif %}
                 </ul>
-   
-
-                
             </div>
+            <form method="GET" action="{% url 'search' %}" class="navbar-form">
+                <div class="form-group search">
+                    <input name="q" type="text" class="form-control" id="q" placeholder="Search events..." value='{{ request.GET.q }}' />
+                    <input type="submit" value="Search" class="btn btn-primary">
+                </div>
+            </form>
+
+
+
+
+        </div>
         </div>
     </nav>
-    
+
     <div class="col-sm-9 offset-sm-3 col-md-10 offset-md-2 main">
         {% block body_block %}
-        <div class ="body-block">
+        <div class="body-block">
         </div>
         {% endblock %}
     </div>
-    
+
     {% block footer %}
     <!-- Footer -->
     <footer class="navbar-fixed-bottom">
 
-       <a href="#"> <img src = {% static "images/facebook.png" %} alt="facebook" class="icons"></a>
-       <a href="#"> <img src = {% static "images/twitter.png" %} alt="facebook" class="icons"></a>
-       <a href="#"> <img src = {% static "images/rss.png" %} alt="facebook" class="icons"></a>
-       <a href="#"> <img src = {% static "images/youtube.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={ % static "images/facebook.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={ % static "images/twitter.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={ % static "images/rss.png" %} alt="facebook" class="icons"></a>
+        <a href="#"> <img src={ % static "images/youtube.png" %} alt="facebook" class="icons"></a>
 
-       <h3>CollaborAid</h3>
+        <h3>CollaborAid</h3>
 
     </footer>
     {% endblock %}

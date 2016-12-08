@@ -3765,8 +3765,8 @@ fieldset[disabled] a.btn {
 .btn-default:active,
 .btn-default.active,
 .open>.dropdown-toggle.btn-default {
-    color: #ffffff;
-    background-color: #798d8f;
+    color: #18BC9C;
+    background-color: #18BC9C;
     border-color: #74898a
 }
 
@@ -3852,7 +3852,8 @@ fieldset[disabled] .btn-default.focus {
 .btn-primary:active,
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
-    background-image: none
+    background-image: none;
+    color: #ffffff;
 }
 
 .btn-primary.disabled:hover,
@@ -6574,8 +6575,11 @@ button.list-group-item-danger.active:focus {
     border-top-left-radius: 3px
 }
 
-.panel-heading>.dropdown .dropdown-toggle {
-    color: inherit
+.dropdown-toggle {
+    color: inherit;
+    display: inline-block;
+    text-align: center;
+    float: left;
 }
 
 .panel-title {
@@ -8319,10 +8323,10 @@ a.list-group-item-danger.active:focus {
 }
 
 .icons {
-   display: inline;
-   float: left;
-   width: 60px;
-   margin-top: 20px;
+    display: inline;
+    float: left;
+    width: 60px;
+    margin-top: 20px;
 }
 
 .nav-item nav-link {
@@ -8339,7 +8343,16 @@ footer {
     padding-left: 30px;
 }
 
-.body-block{
-  margin-bottom:150px;
+.body-block {
+    margin-bottom: 150px;
 }
 
+.form-group search {
+    float: left;
+}
+
+.search_results {
+    margin-left: auto;
+    margin-right: auto;
+    width: 300px;
+}
