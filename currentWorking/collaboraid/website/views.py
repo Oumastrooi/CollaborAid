@@ -207,7 +207,7 @@ def search(request):
             Q(address__icontains=query) |
             Q(city__icontains=query) |
             Q(state__icontains=query)
-            )
+            ).order_by("date")
 
     context = {
         "query" : query,
