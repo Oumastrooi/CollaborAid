@@ -14,8 +14,8 @@ pip install django-registration-redux
 
 
 Group 9 members:
- Williamson, John (jhw48)
- Gan, Denise (dsg49)
- Fuller, Katherine (kjf60)
- Geldenhuys, Elize (e_g172)
- Hodges, Taylor (tnh34)
+ Williamson, John
+ Gan, Denise
+ Fuller, Katherine
+ Geldenhuys, Elize
+ Hodges, Taylor

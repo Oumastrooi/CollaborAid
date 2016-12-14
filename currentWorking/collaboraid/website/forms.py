@@ -1,6 +1,5 @@
 from django import forms
 from website.models import UserProfile, AnEvent
-from django.db.models import Q
 
 class UserProfileForm(forms.ModelForm):
     first_name = forms.CharField(required=False)
@@ -29,6 +28,3 @@ class AnEventForm(forms.ModelForm):
     class Meta:
         model = AnEvent
         exclude = ('volunteer',)
-
-class SearchForm(forms.Form):
-    query = forms.CharField(max_length=30)
