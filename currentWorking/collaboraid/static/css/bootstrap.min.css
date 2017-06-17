@@ -25,7 +25,8 @@ html {
 }
 
 body {
-    margin: 0
+    margin: 0;
+    padding: 0;
 }
 
 article,
@@ -46,7 +47,7 @@ section {
     float: left;
     display: block;
     width: 40%;
-    padding-left: 10%;
+    
 }
 
 audio,
@@ -1477,7 +1478,7 @@ img {
     -webkit-transition: all .2s ease-in-out;
     -o-transition: all .2s ease-in-out;
     transition: all .2s ease-in-out;
-    display: inline-block;
+    display: block;
     max-width: 100%;
     height: auto
 }
@@ -5221,7 +5222,9 @@ select[multiple].input-group-sm>.input-group-btn>.btn {
 }
 
 .navbar-nav {
-    margin: 9.75px -15px
+    margin: 9.75px -15px;
+    display: inline;
+    float: left;
 }
 
 .navbar-nav>li>a {
@@ -5527,7 +5530,7 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-    background-color: #18bc9c;
+    background-color: #11a88b;
     border-color: transparent
 }
 
@@ -5964,8 +5967,6 @@ a.badge:focus {
 }
 
 .jumbotron {
-    padding-top: 30px;
-    padding-bottom: 30px;
     margin-bottom: 30px;
     color: inherit;
     background-color: #ecf0f1
@@ -6023,12 +6024,14 @@ a.badge:focus {
     padding: 4px;
     margin-bottom: 21px;
     line-height: 1.42857143;
-    background-color: #ffffff;
+    background-color: #ecf0f1;
     border: 1px solid #ecf0f1;
     border-radius: 4px;
     -webkit-transition: border .2s ease-in-out;
     -o-transition: border .2s ease-in-out;
-    transition: border .2s ease-in-out
+    transition: border .2s ease-in-out;
+    display: block;
+    margin: 0 auto;
 }
 
 .thumbnail>img,
@@ -8014,13 +8017,12 @@ button.close {
 }
 
 .navbar-default .badge {
-    background-color: #fff;
     color: #2c3e50
 }
 
 .navbar-inverse .badge {
     background-color: #fff;
-    color: #18bc9c
+    color: #18bc9c;
 }
 
 .navbar-brand {
